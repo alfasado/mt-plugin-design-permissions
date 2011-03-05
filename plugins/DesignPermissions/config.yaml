@@ -1,0 +1,26 @@
+name: DesignPermissions
+id:   DesignPermissions
+key:  designpermissions
+version: 1.0
+author_link: https://alfasado.net/
+author_name: Alfasado Inc.
+l10n_class: DesignPermissions::L10N
+description: <__trans phrase="Permissions for Widgets and Style.">
+callbacks:
+    MT::App::CMS::pre_run:
+        - handler: $designpermissions::DesignPermissions::Plugin::_pre_run
+          priority: 1
+permissions:
+    blog.edit_widgets:
+        label: Manage Widgets
+        group: blog_design
+        order: 1000
+        permitted_action:
+            edit_templates: 1
+    blog.edit_style:
+        label: Manage Styles
+        group: blog_design
+        order: 1001
+        permitted_action:
+            edit_templates: 1
+
