@@ -60,6 +60,7 @@ sub _js {
 
 sub is_user_can {
     my ( $blog, $user, $permission ) = @_;
+    return if (! $user );
     $permission = 'can_' . $permission;
     my $perm = $user->is_superuser;
     unless ( $perm ) {
