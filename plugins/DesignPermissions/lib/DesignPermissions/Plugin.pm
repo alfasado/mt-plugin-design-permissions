@@ -53,8 +53,11 @@ sub _pre_run {
 sub _js {
     my $app = shift;
     return $app->json_error( $app->errstr ) unless $app->validate_magic;
-    require StyleCatcher::CMS;
-    my $data = StyleCatcher::CMS::fetch_themes( $app->param( 'url' ) ) or return $app->json_error( $app->errstr );
+    require StyleCatcher::Library;
+    my $lib = StyleCatcher::Library->new()
+        or return $app->error( $app->translate("Invalid request") );
+    my $data = $lib->fetch_themes( $app->param( 'url' ) )
+        or return $app->json_error( $lib->errstr );
     return $app->json_result( $data );
 }
 
